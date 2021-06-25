@@ -1,0 +1,33 @@
+version: 2
+registries:
+  maven-repository-nexus-focus-fish-nexus-content-repositories-rel:
+    type: maven-repository
+    url: http://nexus.focus.fish/nexus/content/repositories/releases/
+    username: greg
+    password: "${{secrets.MAVEN_REPOSITORY_NEXUS_FOCUS_FISH_NEXUS_CONTENT_REPOSITORIES_REL_PASSWORD}}"
+
+updates:
+- package-ecosystem: maven
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "20:00"
+  open-pull-requests-limit: 99
+  reviewers:
+  - peerik
+  - Johanhav
+  ignore:
+  - dependency-name: org.drools:drools-bom
+    versions:
+    - 7.50.0.t20210209
+    - 7.51.0.t20210303
+    - 7.52.0.t20210322
+    - 7.53.0.Final
+  - dependency-name: org.liquibase:liquibase-maven-plugin
+    versions:
+    - 4.3.3
+  - dependency-name: org.eclipse:yasson
+    versions:
+    - 2.0.2
+  registries:
+  - maven-repository-nexus-focus-fish-nexus-content-repositories-rel
